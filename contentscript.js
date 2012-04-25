@@ -10,7 +10,7 @@ var AVRG_ROW = [
 		'<th class="tabelleheader" style="background:#53BE81" colspan="5">Noten Durchschnitt</th>',
 		'<th class="tabelleheader average" style="background:#53BE81" colspan="6"></th>',
 		'<th class="tabelleheader" style="background:#53BE81" colspan="1">',
-			'<input id="scenario" type="submit" value="Note eintragen(Szenario)"/>',
+			'<input id="scenario" type="submit" value="Note eintragen(Simulation)"/>',
 		'</th>',
 	'</tr>'].join('');
 
@@ -30,30 +30,36 @@ var HYP_ROW = [
 	'<td align="center" class="tabelle1">&nbsp;</td>',
 	'<td align="center" class="tabelle1">&nbsp;</td>',
 	'<td align="center" class="tabelle1">&nbsp;</td>',
-	'<td align="center" class="tabelle1">&nbsp;</td>',
+	'<td align="center" class="tabelle1"><input class="removeHyp" type="submit" value="entfernen"/></td>',
 '</tr>'].join('');
 
 prepareContent();
 calculateAverage();
 
 function prepareContent() {
-	table = $('table').eq(1);
+	table = $('.content').find('table').eq(1);
 	table.find('tr').each(function(i, value) {
 		var rowContents = $(value).find('td');
-		if ( rowContents.length >= 7 && rowContents.eq(6).html().indexOf('bestanden') >= 0 ) {
+		
+		if ( rowContents && rowContents.length >= 7 && rowContents.eq(6).html().match(/(bestanden)/gi) != null ) {
 			rowContents.eq(5).addClass('grade');
 			rowContents.eq(7).addClass('ects');
 		}
 	});
 
-	console.log(AVRG_ROW);
 	if ( $('.grade').length > 0 ) {
 		table.append(AVRG_ROW);
 	}
 
 	$('#scenario').click(function() {
 		$('#averageRow').before(HYP_ROW);
-		$('.gradeInput, .ectsInput').last().bind('onchange keyup', hypChanged);
+		$('.gradeInput').last().bind('onchange keyup', hypChanged);
+		$('.ectsInput').last().bind('onchange keyup', hypChanged);
+		$('.removeHyp').last().click(function() {
+			$(this).parent().parent().remove();
+			calculateAverage();
+		});
+		calculateAverage();
 	});
 }
 
@@ -87,7 +93,6 @@ function calculateAverage() {
 }
 
 function hypChanged() {
-	console.log('yho');
 	var sPos = $(this).caret().start;
 	var ePos = $(this).caret().end;
 

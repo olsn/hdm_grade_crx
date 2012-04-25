@@ -1,6 +1,6 @@
 {
   "name" : "HdM Notenspiegel",
-  "version" : "0.5",
+  "version" : "0.81",
   "description" : "Berechnet den Notenspiegel auf der HdM SB-Funktionen Seite. (ALLE ANGABEN OHNE GEWÄHR!)",
   "content_scripts" : [
     {
