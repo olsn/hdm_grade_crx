@@ -1,6 +1,6 @@
 {
   "name" : "HdM Notenspiegel",
-  "version" : "0.81",
+  "version" : "0.82",
   "description" : "Berechnet den Notenspiegel auf der HdM SB-Funktionen Seite. (ALLE ANGABEN OHNE GEWÄHR!)",
   "content_scripts" : [
     {
@@ -15,5 +15,6 @@
   "icons": {
     "128": "icon_128.png"
   },
+  "update_url": "http://mars.iuk.hdm-stuttgart.de/~oh011/noten/updates.xml",
   "manifest_version": 2
 }
