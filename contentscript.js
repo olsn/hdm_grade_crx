@@ -41,7 +41,7 @@ function prepareContent() {
 	table.find('tr').each(function(i, value) {
 		var rowContents = $(value).find('td');
 		
-		if ( rowContents && rowContents.length >= 7 && rowContents.eq(6).html().match(/(bestanden)/gi) != null ) {
+		if ( rowContents && rowContents.length >= 7 && rowContents.eq(6).html().match(/(bestanden)/gi) != null && parseGradeFloat(rowContents.eq(5).html() != 0)) {
 			rowContents.eq(5).addClass('grade');
 			rowContents.eq(7).addClass('ects');
 		}
